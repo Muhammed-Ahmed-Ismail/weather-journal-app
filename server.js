@@ -31,11 +31,7 @@ app.post("/save-data", (req, res) => {
     projectData.temp = data.temp;
     projectData.date = data.date;
     projectData.content = data.content;
-    console.log(data)
-    console.log(projectData)
-    res.send("")
 });
 app.get("/get-data", (req, res) => {
     res.send(JSON.stringify(projectData))
-    console.log('\n get is triggered')
 })

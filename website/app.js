@@ -15,7 +15,6 @@ genButton.addEventListener('click', async () => {
     let content = contentInput.value;
     await postData(newDate, temp, content).then(async function () {
         let data = await fetch("http://localhost:8000/get-data");
-        console.log("after post")
         return data.json();
     }).then((data) => {
         updateUI(data)
@@ -74,6 +73,5 @@ async function postData(date, temp, content) {
     })
     return new Promise((resolve, reject) => {
         resolve()
-        console.log('promisse returned')
     })
 }
