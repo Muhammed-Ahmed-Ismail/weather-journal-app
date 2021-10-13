@@ -31,6 +31,7 @@ app.post("/save-data", (req, res) => {
     projectData.temp = data.temp;
     projectData.date = data.date;
     projectData.content = data.content;
+    res.send()
 });
 app.get("/get-data", (req, res) => {
     res.send(JSON.stringify(projectData))
