@@ -9,7 +9,7 @@ const contentDiv = document.querySelector("div#content");
 //console.log(zip.value)
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
+let newDate = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
 genButton.addEventListener('click', async () => {
     let temp = await getData();
     let content = contentInput.value;
