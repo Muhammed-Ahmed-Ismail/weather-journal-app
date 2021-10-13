@@ -13,15 +13,25 @@ let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
 genButton.addEventListener('click', async () => {
     let temp = await getData();
     let content = contentInput.value;
-    //await postData(newDate, temp, content)
-    updateUI(newDate, temp, content)
+    await postData(newDate, temp, content).then(async function () {
+        let data = await fetch("http://localhost:8000/get-data");
+        console.log("after post")
+        return data.json();
+    }).then((data) => {
+        updateUI(data)
+    }).catch((err) => {
+        console.error(err)
+    })
+    // updateUI(newDate, temp, content)
 })
 
 
-function updateUI(newDate, temp, content) {
-    dateDiv.innerHTML = `Date: ${newDate}`;
-    tempDiv.innerHTML = `Temperature: ${temp} C`;
-    contentDiv.innerHTML = `How it feels: ${content}`;
+async function updateUI(data) {
+
+    dateDiv.innerHTML = `Date: ${data.date}`;
+    tempDiv.innerHTML = `Temperature: ${data.temp} C`;
+    contentDiv.innerHTML = `How it feels: ${data.content}`;
+
 }
 
 
@@ -44,6 +54,7 @@ async function getData() {
     return temp
 
 }
+
 async function postData(date, temp, content) {
     let dataTopPost = {
         date,
@@ -60,5 +71,9 @@ async function postData(date, temp, content) {
         console.log(res)
     }).catch((err) => {
         console.error(err)
+    })
+    return new Promise((resolve, reject) => {
+        resolve()
+        console.log('promisse returned')
     })
 }
